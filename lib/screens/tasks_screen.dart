@@ -27,7 +27,7 @@ class TasksScreen extends StatelessWidget {
                   width: 20,
                 ),
                 Text(
-                  "Today's Tasks",
+                  "المهام اليومية",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 40,
@@ -40,7 +40,7 @@ class TasksScreen extends StatelessWidget {
               height: 10,
             ),
             const Text(
-              "You have no tasks for today",
+              "ليس لديك أي مهام اليوم",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

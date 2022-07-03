@@ -11,7 +11,7 @@ class AddTaskScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Add Task",
+            "اضافة مهمه",
             style: TextStyle(
               fontSize: 30,
               color: Colors.indigo.shade400,
@@ -38,7 +38,13 @@ class AddTaskScreen extends StatelessWidget {
               ),
               textStyle: const TextStyle(color: Colors.white),
             ),
-            child: const Text("Add"),
+            child: const Text(
+              "اضافه",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             onPressed: () {},
           ),
         ],
