@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+import 'package:today_todo/models/tasks_data.dart';
+
 class AddTaskScreen extends StatelessWidget {
+  // final Function addTaskCallback;
   const AddTaskScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final textController = TextEditingController();
     return Container(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -22,7 +27,8 @@ class AddTaskScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          const TextField(
+          TextField(
+            controller: textController,
             autofocus: true,
             textAlign: TextAlign.center,
           ),
@@ -45,7 +51,14 @@ class AddTaskScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              final task = textController.text;
+              if (task.isNotEmpty) {
+                Provider.of<TasksData>(context, listen: false).addTask(task);
+                textController.clear();
+                Navigator.pop(context);
+              }
+            },
           ),
         ],
       ),

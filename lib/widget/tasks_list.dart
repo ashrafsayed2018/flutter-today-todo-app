@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:today_todo/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:today_todo/models/tasks_data.dart';
 import 'package:today_todo/widget/task_tile.dart';
 
-class TasksList extends StatefulWidget {
+class TasksList extends StatelessWidget {
   const TasksList({Key? key}) : super(key: key);
 
   @override
-  State<TasksList> createState() => _TasksListState();
-}
-
-class _TasksListState extends State<TasksList> {
-  List<Task> tasks = [
-    Task(name: 'الذهاب الى التسوق'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: ' شراء  هدايا جديدة'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: 'الذهاب الى التسوق'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: ' شراء  هدايا جديدة'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: ' شراء جلسة تعليمية'),
-    Task(name: ' شراء جلسة تعليمية'),
-  ];
-  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: tasks.length,
-      itemBuilder: (context, index) => TaskTile(
-        taskTitle: tasks[index].name,
-        isChecked: tasks[index].isDone,
-        checkboxCallback: (bool? checkboxState) {
-          setState(() {
-            tasks[index].isDone = checkboxState!;
-          });
-        },
+    return Consumer<TasksData>(
+      builder: (context, tasksData, child) => ListView.builder(
+        itemCount: tasksData.tasks.length,
+        itemBuilder: (context, index) => TaskTile(
+          taskTitle: tasksData.tasks[index].name,
+          isChecked: tasksData.tasks[index].isDone,
+          checkboxCallback: (bool? checkboxState) {
+            tasksData.updateTask(tasksData.tasks[index]);
+          },
+          listTileDeleteCallback: () {
+            tasksData.deleteTask(tasksData.tasks[index]);
+          },
+        ),
       ),
     );
   }

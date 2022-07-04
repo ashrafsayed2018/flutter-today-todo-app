@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:today_todo/models/tasks_data.dart';
 import 'package:today_todo/screens/add_task_screen.dart';
-
 import '../widget/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -39,11 +40,15 @@ class TasksScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              "ليس لديك أي مهام اليوم",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
+            Consumer<TasksData>(
+              builder: (context, tasksData, child) => Text(
+                tasksData.tasks.isNotEmpty
+                    ? "لديك ${tasksData.tasks.length} مهام"
+                    : "ليس لديك أي مهام اليوم",
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
               ),
             ),
             const SizedBox(
@@ -72,7 +77,10 @@ class TasksScreen extends StatelessWidget {
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
-                  child: const AddTaskScreen()),
+                  child: Consumer<TasksData>(
+                    builder: (context, tasksData, child) =>
+                        const AddTaskScreen(),
+                  )),
             ),
           );
         },
